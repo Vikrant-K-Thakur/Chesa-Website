@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Media and Events</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-image: url('Assets/backgroundimg2.jpg');
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+            color: white;
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        .header {
+            background-color: rgba(0, 0, 0, 0.5);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            backdrop-filter: blur(8px);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+        }
+
+        .logo-img {
+            width: 76px;
+            height: 40px;
+            object-fit: contain;
+        }
+
+        .nav-links {
+            display: none;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        @media (min-width: 768px) {
+            .nav-links {
+                display: flex;
+            }
+        }
+
+        .nav-link {
+            color: white;
+            font-size: 1rem;
+            font-weight: 500;
+            text-decoration: none;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: #3b82f6;
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            transform: scaleX(1);
+        }
+
+        .heading {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Merriweather', serif;
+            font-size: clamp(3rem, 10vw, 8rem);
+            text-align: center;
+            padding: 1rem;
+            animation: slideIn 1.2s ease-in-out forwards;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-100vh);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 2rem auto;
+            padding: 2rem;
+            border: 4px solid;
+            border-image: linear-gradient(45deg, #8A2BE2, #FF69B4) 1;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(8px);
+        }
+
+        .grid {
+            display: grid;
+            gap: 2rem;
+        }
+
+        @media (min-width: 1024px) {
+            .grid {
+                grid-template-columns: 1fr 1fr;
+                align-items: center;
+            }
+        }
+
+        .slideshow-container {
+            position: relative;
+            aspect-ratio: 16/9;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .slideshow-images {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .slideshow-images img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .slideshow-images.active {
+            opacity: 1;
+        }
+
+        .slideshow-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            z-index: 2;
+        }
+
+        .slideshow-btn:hover {
+            background-color: rgba(255, 255, 255, 0.4);
+        }
+
+        .prev-btn {
+            left: 1rem;
+        }
+
+        .next-btn {
+            right: 1rem;
+        }
+
+        .slideshow-dots {
+            position: absolute;
+            bottom: 1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 0.5rem;
+            z-index: 2;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            background-color: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .dot.active {
+            background-color: white;
+        }
+
+        .content {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .content h2 {
+            font-family: 'Merriweather', serif;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 2rem;
+        }
+
+        .stat h3,
+        .stat h4 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer {
+            background: linear-gradient(45deg, rgba(0, 0, 0, 0.8), rgba(26, 26, 26, 0.8));
+            padding: 3rem 0;
+            margin-top: 4rem;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .social-icon {
+            position: relative;
+            color: white;
+            font-size: 1.5rem;
+            padding: 1rem;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .social-icon:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .tooltip {
+            position: absolute;
+            bottom: -40px;
+            left: 50%;
+            transform: translateX(-50%) scale(0);
+            background: white;
+            color: black;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .social-icon:hover .tooltip {
+            transform: translateX(-50%) scale(1);
+            opacity: 1;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+                margin: 1rem;
+            }
+
+            .stats {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .social-icons {
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <section>
+        <div class="heading">
+            Media and Events
+        </div>
+    </section>
+
+    <!-- Slider 1 -->
+    <section>
+        <div class="container">
+            <div class="grid">
+                <div>
+                    <div class="slideshow-container" id="slider1">
+                        <div class="slideshow-images active">
+                            <img src="assets1/1.jpeg" alt="Slider 1 Image 1">
+                        </div>
+                        <div class="slideshow-images">
+                            <img src="assets1/2.jpeg" alt="Slider 1 Image 2">
+                        </div>
+                        <div class="slideshow-images">
+                            <img src="assets1/3.jpeg" alt="Slider 1 Image 3">
+                        </div>
+                        <button class="prev-btn">&#10094;</button>
+                        <button class="next-btn">&#10095;</button>
+                        <div class="slideshow-dots">
+                            <span class="dot active"></span>
+                            <span class="dot"></span>
+                            <span class="dot"></span>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="content">
+                        <h2>Teachers Day</h2>
+                        <p>The Name of your Association is a student-centric fraternity dedicated to holistic
+                            development.</p>
+                        <div class="stats">
+                            <div class="stat">
+                                <h3>33+</h3>
+                                <h6>Years of Experience</h6>
+                            </div>
+                            <div class="stat">
+                                <h4>100+</h4>
+                                <h6>Successful Projects</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slider 2 -->
+    <section>
+        <div class="container">
+            <div class="grid">
+                <div>
+                    <div class="slideshow-container" id="slider2">
+                        <div class="slideshow-images">
+                            <img src="assets1/6.jpeg" alt="Slider 2 Image 3">
+                        </div>
+                        <div class="slideshow-images">
+                            <img src="assets1/7.jpeg" alt="Slider 2 Image 4">
+                        </div>
+                        <button class="prev-btn">&#10094;</button>
+                        <button class="next-btn">&#10095;</button>
+                        <div class="slideshow-dots">
+                            <span class="dot active"></span>
+                            <span class="dot"></span>
+                            <span class="dot"></span>
+                            <span class="dot"></span>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="content">
+                        <h2>Autocad Workshop</h2>
+                        <p>Your Association is dedicated to innovation and collaboration among students.</p>
+                        <div class="stats">
+                            <div class="stat">
+                                <h3>33+</h3>
+                                <h6>Years of Experience</h6>
+                            </div>
+                            <div class="stat">
+                                <h4>100+</h4>
+                                <h6>Successful Projects</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slider 3 -->
+    <section>
+        <div class="container">
+            <div class="grid">
+                <div>
+                    <div class="slideshow-container" id="slider3">
+                        <div class="slideshow-images active">
+                            <img src="assets1/8.jpeg" alt="Slider 3 Image 1">
+                        </div>
+                        <div class="slideshow-images">
+                            <img src="assets1/9.jpeg" alt="Slider 3 Image 2">
+                        </div>
+                        <div class="slideshow-images">
+                            <img src="assets1/10.jpeg" alt="Slider 3 Image 3">
+                        </div>
+                        <button class="prev-btn">&#10094;</button>
+                        <button class="next-btn">&#10095;</button>
+                        <div class="slideshow-dots">
+                            <span class="dot active"></span>
+                            <span class="dot"></span>
+                            <span class="dot"></span>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="content">
+                        <h2>Aspen Workshop</h2>
+                        <p>Collaboration and creativity are at the heart of our association.</p>
+                        <div class="stats">
+                            <div class="stat">
+                                <h3>33+</h3>
+                                <h6>Years of Experience</h6>
+                            </div>
+                            <div class="stat">
+                                <h4>100+</h4>
+                                <h6>Successful Projects</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slider 4 -->
+    <section>
+        <div class="container">
+            <div class="grid">
+                <div>
+                    <div class="slideshow-container" id="slider4">
+                        <div class="slideshow-images active">
+                            <img src="assets1/5.jpeg" alt="Slider 3 Image 1">
+                        </div>
+                        <div class="slideshow-images">
+                            <img src="assets1/4.jpeg" alt="Slider 3 Image 2">
+                        </div>
+                        <div class="slideshow-images">
+                            <img src="Assets/event-4-career crafting-30-july(1).jpg" alt="Slider 3 Image 3">
+                        </div>
+                        <button class="prev-btn">&#10094;</button>
+                        <button class="next-btn">&#10095;</button>
+                        <div class="slideshow-dots">
+                            <span class="dot active"></span>
+                            <span class="dot"></span>
+                            <span class="dot"></span>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="content">
+                        <h2>Career Crafting</h2>
+                        <p>Collaboration and creativity are at the heart of our association.</p>
+                        <div class="stats">
+                            <div class="stat">
+                                <h3>33+</h3>
+                                <h6>Years of Experience</h6>
+                            </div>
+                            <div class="stat">
+                                <h4>100+</h4>
+                                <h6>Successful Projects</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <h3>Follow Us</h3>
+            <div class="social-icons">
+                <a href="#" class="social-icon">
+                    <i class="fab fa-instagram"></i>
+                    <span class="tooltip">Instagram</span>
+                </a>
+                <a href="#" class="social-icon">
+                    <i class="fab fa-facebook"></i>
+                    <span class="tooltip">Facebook</span>
+                </a>
+                <a href="#" class="social-icon">
+                    <i class="fab fa-linkedin"></i>
+                    <span class="tooltip">LinkedIn</span>
+                </a>
+                <a href="#" class="social-icon">
+                    <i class="fab fa-youtube"></i>
+                    <span class="tooltip">YouTube</span>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function setupSlider(sliderId) {
+            const slider = document.getElementById(sliderId);
+            const images = Array.from(slider.querySelectorAll('.slideshow-images'));
+            const dots = Array.from(slider.querySelectorAll('.dot'));
+            const prevBtn = slider.querySelector('.prev-btn');
+            const nextBtn = slider.querySelector('.next-btn');
+            let currentIndex = 0;
+            let autoplayInterval;
+
+            function showImage(index) {
+                images.forEach((img, i) => {
+                    img.classList.toggle('active', i === index);
+                    dots[i].classList.toggle('active', i === index);
+                });
+            }
+
+            function prevImage() {
+                currentIndex = (currentIndex - 1 + images.length) % images.length;
+                showImage(currentIndex);
+            }
+
+            function nextImage() {
+                currentIndex = (currentIndex + 1) % images.length;
+                showImage(currentIndex);
+            }
+
+            function startAutoplay() {
+                stopAutoplay();
+                autoplayInterval = setInterval(nextImage, 5000);
+            }
+
+            function stopAutoplay() {
+                if (autoplayInterval) {
+                    clearInterval(autoplayInterval);
+                }
+            }
+
+            prevBtn.addEventListener('click', () => {
+                prevImage();
+                startAutoplay();
+            });
+
+            nextBtn.addEventListener('click', () => {
+                nextImage();
+                startAutoplay();
+            });
+
+            dots.forEach((dot, index) => {
+                dot.addEventListener('click', () => {
+                    currentIndex = index;
+                    showImage(currentIndex);
+                    startAutoplay();
+                });
+            });
+
+            slider.addEventListener('mouseenter', stopAutoplay);
+            slider.addEventListener('mouseleave', startAutoplay);
+
+            showImage(currentIndex);
+            startAutoplay();
+        }
+
+        // Initialize all sliders
+        document.addEventListener('DOMContentLoaded', () => {
+            ['slider1', 'slider2', 'slider3', 'slider4'].forEach(setupSlider);
+        });
+    </script>
+</body>
+
+</html>

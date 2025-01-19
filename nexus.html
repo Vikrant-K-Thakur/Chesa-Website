@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes glow {
+            0% { text-shadow: 0 0 5px #a6c1ee, 0 0 10px #9694FF, 0 0 15px #605EA1; }
+            50% { text-shadow: 0 0 10px #9694FF, 0 0 20px #605EA1, 0 0 25px #4335A7; }
+            100% { text-shadow: 0 0 5px #a6c1ee, 0 0 10px #9694FF, 0 0 15px #605EA1; }
+        }
+        .fade-in { animation: fadeIn 1s ease forwards; }
+        .glow { animation: glow 2s infinite ease-in-out; color: #a6c1ee; font-weight: 600; }
+        .letter { display: inline-block; opacity: 0; }
+        .snowflake {
+                position: fixed;
+                animation: fall linear infinite;
+            }
+            @keyframes fall {
+                to {
+                    transform: translateY(100vh) translateX(20px);
+                }
+            }
+        
+                  
+        
+    </style>
+</head>
+<body class="font-[poppins] bg-white m-0">
+
+    <header class="bg-orange-400 absolute top-0 left-0 w-full z-10 shadow-sm backdrop-blur-md ">
+        <nav class="flex flex-col md:flex-row justify-between items-center w-[92%] mx-auto py-1">
+            <div data-aos="fade-right">
+                <img class="w-19 h-10" src="assets1/work2.0.png" alt="Logo">
+            </div>
+            <ul class="flex flex-col md:flex-row items-center gap-8 text-large font-medium mt-4 md:mt-0" data-aos="fade-down" data-aos-delay="100">
+                <li><a class="text-white relative hover:text-gray-300 after:block after:absolute after:bg-white after:h-[3px] after:w-full after:scale-x-0 after:transition-transform after:duration-300 after:origin-center hover:after:scale-x-100" href="index2.html">Home</a></li>
+                <li><a class="text-white relative hover:text-gray-300 after:block after:absolute after:bg-white after:h-[3px] after:w-full after:scale-x-0 after:transition-transform after:duration-300 after:origin-center hover:after:scale-x-100" href="about.html">About</a></li>
+                <li><a class="text-white relative hover:text-gray-300 after:block after:absolute after:bg-white after:h-[3px] after:w-full after:scale-x-0 after:transition-transform after:duration-300 after:origin-center hover:after:scale-x-100" href="eventsFinal.html">Events</a></li>
+                <li><a class="text-white relative hover:text-gray-300 after:block after:absolute after:bg-white after:h-[3px] after:w-full after:scale-x-0 after:transition-transform after:duration-300 after:origin-center hover:after:scale-x-100" href="contact.html">Core Members</a></li>
+                <li><a class="text-white relative hover:text-gray-300 after:block after:absolute after:bg-white after:h-[3px] after:w-full after:scale-x-0 after:transition-transform after:duration-300 after:origin-center hover:after:scale-x-100" href="contact.html">Contact Us</a></li>
+                <li><a class="text-white relative hover:text-gray-300 after:block after:absolute after:bg-white after:h-[3px] after:w-full after:scale-x-0 after:transition-transform after:duration-300 after:origin-center hover:after:scale-x-100" href="timeline2.html">Blogs</a></li>
+            </ul>
+            <button class="bg-white text-orange-400 px-2 py-1 rounded hover:bg-orange-500 hover:text-white text-lg font-medium mt-2 md:mt-0" onclick="">Join</button>
+        </nav>
+    </header>
+<section class="flex flex-col items-center h-screen justify-center text-center">
+</section>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script>
+    // Initialize AOS
+    AOS.init({
+        duration: 1000,
+        once: true
+    });
+
+    // Text animation
+    const phrase = "One Molecule at a Time";
+    const moleculeText = document.getElementById('moleculeText');
+    phrase.split('').forEach((letter, index) => {
+        const span = document.createElement('span');
+        span.textContent = letter === ' ' ? '\u00A0' : letter;
+        span.classList.add('letter');
+        moleculeText.appendChild(span);
+        setTimeout(() => {
+            span.classList.add('fade-in');
+            span.style.opacity = '1';
+        }, index * 150);
+    });
+
+    // Snowfall effect
+    function createSnowflake() {
+        const snowflake = document.createElement('div');
+        snowflake.className = 'snowflake w-2 h-2 bg-white rounded-full';
+        snowflake.style.left = Math.random() * window.innerWidth + 'px';
+        snowflake.style.opacity = Math.random() * 0.6 + 0.2;
+        snowflake.style.animationDuration = Math.random() * 3 + 2 + 's';
+        
+        const container = document.getElementById('snowfall-container');
+        container.appendChild(snowflake);
+
+        snowflake.addEventListener('animationend', () => {
+            snowflake.remove();
+        });
+    }
+
+    // Create snowflakes at regular intervals
+    setInterval(createSnowflake, 100);
+
+</script>
+</body>
+</html>

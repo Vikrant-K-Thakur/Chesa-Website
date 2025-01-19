@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parallax Test</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .layer {
+            position: absolute;
+            pointer-events: none;
+            transition: transform 0.2s linear;
+            /* Add night effect to layers */
+            filter: brightness(0.7) saturate(0.8);
+            mix-blend-mode: multiply;
+        }
+        .parallax {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            text-align: center;
+            background-color: rgba(0, 0, 40, 0.7); /* Darker blue-tinted overlay for night effect */
+        }
+
+        /* Adjusted text for better visibility at night */
+        #text {
+            position: absolute;
+            font-size: 5em;
+            color: rgba(255, 255, 255, 0.95);
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3), 2px 2px 4px rgba(0, 0, 0, 0.8);
+            z-index: 10;
+        }
+
+        /* Add a subtle moon effect */
+        .moon {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background: rgba(255, 255, 230, 0.9);
+            border-radius: 50%;
+            top: 50px;
+            right: 100px;
+            box-shadow: 0 0 50px rgba(255, 255, 230, 0.5);
+            z-index: 1;
+        }
+    </style>
+</head>
+
+<body class="m-0 p-0 overflow-x-hidden font-[poppins] bg-gradient-to-t from-[#474E93] to-[#16213e]">
+    <section class="parallax relative flex justify-center items-center h-screen overflow-hidden text-center">
+        <div class="moon"></div>
+        <img src="assets1/hill1.png" id="hill1" class="layer w-full" data-speed="2" alt="Hill 1">
+        <img src="assets1/hill2.png" class="layer w-full" data-speed="3" alt="Hill 2">
+        <img src="assets1/hill3.png" class="layer w-full" data-speed="4" alt="Hill 3">
+        <img src="assets1/hill4.png" id="hill4" class="layer w-full" data-speed="5" alt="Hill 4">
+        <img src="assets1/hill5.png" id="hill5" class="layer w-full" data-speed="6" alt="Hill 5">
+        <img src="assets1/tree.png" class="layer w-full" data-speed="7" alt="Tree">
+        <h2 id="text" class="absolute text-5xl text-white z-0 drop-shadow-md">CONTACT US</h2>
+        <img src="assets1/leaf.png" id="leaf" class="layer w-full" data-speed="8" alt="Leaf">
+        <img src="assets1/plant.png" class="layer w-full" data-speed="9" alt="Plant">
+    </section>
+
+    <section class="sec relative bg-black/80 p-20">
+        <h2 class="text-3xl text-white mb-2">CONTENT</h2>
+        <p class="text-white">
+            abra ka dabra gili gili choooo
+            Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium...
+            abra ka dabra gili gili choooo
+            Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium...
+            abra ka dabra gili gili choooo
+            Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium...
+            abra ka dabra gili gili choooo
+            Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium...
+            abra ka dabra gili gili choooo
+            Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium...
+        </p>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

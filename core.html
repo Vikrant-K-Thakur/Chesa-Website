@@ -1,0 +1,1160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes glow {
+            0% { text-shadow: 0 0 5px #a6c1ee, 0 0 10px #9694FF, 0 0 15px #605EA1; }
+            50% { text-shadow: 0 0 10px #9694FF, 0 0 20px #605EA1, 0 0 25px #4335A7; }
+            100% { text-shadow: 0 0 5px #a6c1ee, 0 0 10px #9694FF, 0 0 15px #605EA1; }
+        }
+        .fade-in { 
+            animation: fadeIn 1s ease forwards; 
+        }
+        .glow-text { 
+            animation: glow 2s infinite ease-in-out; 
+        }
+        .layer {
+            position: absolute;
+            pointer-events: none;
+            transition: transform 0.2s linear;
+            filter: brightness(0.7) saturate(0.8);
+            mix-blend-mode: multiply;
+        }
+        .parallax {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            text-align: center;
+            background-color: rgba(71, 78, 147, 0.7);
+        }
+        #text {
+            position: absolute;
+            font-size: 5em;
+            color: rgba(255, 255, 255, 0.95);
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3), 2px 2px 4px rgba(41, 19, 43, 0.538);
+            z-index: 10;
+        }
+        .moon {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background: rgba(255, 255, 230, 0.9);
+            border-radius: 50%;
+            top: 50px;
+            right: 100px;
+            box-shadow: 0 0 50px rgba(255, 255, 230, 0.5);
+            z-index: 1;
+        }
+        .letter { 
+            display: inline-block; 
+            opacity: 0; 
+        }
+
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, #16213e, #474E93);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s;
+        }
+
+        .loader-content {
+            text-align: center;
+            color: white;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .progress-bar {
+            width: 200px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            margin: 20px auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .progress {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            background: linear-gradient(90deg, #a6c1ee, #9694FF);
+            width: 0%;
+            border-radius: 4px;
+            transition: width 0.05s ease;
+            box-shadow: 0 0 10px rgba(150, 148, 255, 0.5);
+        }
+
+        .percentage {
+            font-size: 24px;
+            font-weight: 500;
+            text-shadow: 0 0 10px rgba(166, 193, 238, 0.5);
+        }
+
+        .loading-text {
+            margin-top: 10px;
+            font-size: 14px;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body class="font-[poppins] bg-gradient-to-t from-[#474E93] to-[#16213e] m-0">
+    <div class="preloader">
+        <div class="loader-content">
+            <div class="percentage">0%</div>
+            <div class="progress-bar">
+                <div class="progress"></div>
+            </div>
+            <div class="loading-text">Loading...</div>
+        </div>
+    </div>
+    <header class="bg-transparent absolute top-0 left-0 w-full z-10">
+        <nav class="flex flex-col md:flex-row justify-between items-center w-[92%] mx-auto py-1">
+            <div data-aos="fade-right">
+                <img class="w-19 h-10" src="assets1/nk.png" alt="Logo">
+            </div>
+            <ul class="flex flex-col md:flex-row items-center gap-8 text-large font-medium mt-4 md:mt-0" data-aos="fade-down" data-aos-delay="100">
+                <li><a class="text-white relative hover:text-gray-300 after:block after:absolute after:bg-blue-400 after:h-[3px] after:w-full after:scale-x-0 after:transition-transform after:duration-300 after:origin-center hover:after:scale-x-100" href="index2.html">Home</a></li>
+                <li><a class="text-white relative hover:text-gray-300 after:block after:absolute after:bg-blue-400 after:h-[3px] after:w-full after:scale-x-0 after:transition-transform after:duration-300 after:origin-center hover:after:scale-x-100" href="about.html">About</a></li>
+                <li><a class="text-white relative hover:text-gray-300 after:block after:absolute after:bg-blue-400 after:h-[3px] after:w-full after:scale-x-0 after:transition-transform after:duration-300 after:origin-center hover:after:scale-x-100" href="eventsFinal.html">Events</a></li>
+                <li><a class="text-white relative hover:text-gray-300 after:block after:absolute after:bg-blue-400 after:h-[3px] after:w-full after:scale-x-0 after:transition-transform after:duration-300 after:origin-center hover:after:scale-x-100" href="core.html">Core Members</a></li>
+                <li><a class="text-white relative hover:text-gray-300 after:block after:absolute after:bg-blue-400 after:h-[3px] after:w-full after:scale-x-0 after:transition-transform after:duration-300 after:origin-center hover:after:scale-x-100" href="contact.html">Contact Us</a></li>
+                <li><a class="text-white relative hover:text-gray-300 after:block after:absolute after:bg-blue-400 after:h-[3px] after:w-full after:scale-x-0 after:transition-transform after:duration-300 after:origin-center hover:after:scale-x-100" href="timeline2.html">Blogs</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="parallax relative flex justify-center items-center h-screen overflow-hidden text-center">
+        <div class="moon"></div>
+        <img src="assets1/hill1.png" id="hill1" class="layer w-full" data-speed="2" alt="Hill 1">
+        <img src="assets1/hill2.png" class="layer w-full" data-speed="3" alt="Hill 2">
+        <img src="assets1/hill3.png" class="layer w-full" data-speed="4" alt="Hill 3">
+        <img src="assets1/hill4.png" id="hill4" class="layer w-full" data-speed="5" alt="Hill 4">
+        <img src="assets1/hill5.png" id="hill5" class="layer w-full" data-speed="6" alt="Hill 5">
+        <img src="assets1/tree.png" class="layer w-full" data-speed="7" alt="Tree">
+        <h2 id="text" class="absolute text-5xl text-white z-0 drop-shadow-md glow-text">CORE MEMBERS</h2>
+        <img src="assets1/leaf.png" id="leaf" class="layer w-full" data-speed="8" alt="Leaf">
+        <img src="assets1/plant.png" class="layer w-full" data-speed="9" alt="Plant">
+    </section>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<div class="text-center py-8">
+    <h1 class="text-4xl md:text-5xl font-['Merriweather'] text-center text-white mb-12 glow-text" data-aos="fade-down" data-aos-duration="1000">CORE TEAM MEMBERS</h1>
+
+</div>
+
+<section class="core-team-section opacity-0 translate-y-10 transition-all duration-500 px-4">
+    <!-- Added a container div with dark background and padding -->
+    <div class="max-w-4xl mx-auto bg-black/40 backdrop-blur-sm rounded-xl p-8 shadow-2xl">
+        <section class="container mx-auto py-6">
+            <div class="text-center py-8">
+                <h1 class="text-4xl md:text-5xl font-['Merriweather'] text-center text-white mb-12 glow-text" data-aos="fade-down" data-aos-duration="1000"> PRESIDENT </h1>
+            </div>
+            <!-- Changed to flex column layout -->
+            <div class="flex flex-col items-center gap-8">
+                
+                <div class="shadow-lg rounded-lg relative overflow-hidden group w-64 h-64">
+                    <img src="assets1/Screenshot 2024-11-23 111633.png" class="rounded-lg w-full h-full object-cover" alt="">
+                    <div class="absolute bg-black bg-opacity-60 -translate-x-full rounded-lg top-0 left-0 w-full h-full flex items-center justify-center group-hover:translate-x-0 duration-300">
+                        <div class="text-center">
+                            <h3 class="text-white text-2xl font-bold mb-2 font-['Merriweather'] text-center text-white mb-12 glow-text" data-aos="fade-down" data-aos-duration="1000">RIDDHI RAUL</h3>
+                            <ul>
+                                <li class="inline-block mx-3"><a class="text-white hover:text-purple-500 duration-300"><ion-icon name="logo-linkedin"></ion-icon></a></li>
+                                <li class="inline-block mx-3"><a class="text-white hover:text-purple-500 duration=300"><ion-icon name='logo-instagram'></ion-icon></a></li> 
+                            </ul> 
+                        </div> 
+                    </div> 
+                </div> 
+                <!-- Vice Presidents Section -->
+                <div class="text-center py-8 w-full">
+                    <h1 class="text-4xl md:text-5xl font-['Merriweather'] text-center text-white mb-12 glow-text" data-aos="fade-down" data-aos-duration="1000">VICE PRESIDENTS</h1>
+                </div>
+                
+                <!-- Flex container for side-by-side vice president cards -->
+                <div class="flex flex-col md:flex-row justify-center gap-8 w-full">
+                    <!-- First Vice President Card -->
+                    <div class="shadow-lg rounded-lg relative overflow-hidden group w-64 h-64">
+                        <img src="assets1/darshan.jpeg" class="rounded-lg w-full h-full object-cover" alt="">
+                        <div class="absolute bg-black bg-opacity-60 -translate-x-full rounded-lg top-0 left-0 w-full h-full flex items-center justify-center group-hover:translate-x-0 duration-300">
+                            <div class="text-center">
+                                <h3 class="text-white text-2xl font-bold mb-2 font-['Merriweather'] text-center text-white mb-12 glow-text" data-aos="fade-down" data-aos-duration="1000">Darshan Khamat</h3>
+                                <ul>
+                                    <li class="inline-block mx-3"><a class="text-white hover:text-purple-500 duration-300"><ion-icon name="logo-linkedin"></ion-icon></a></li>
+                                    <li class="inline-block mx-3"><a class="text-white hover:text-purple-500 duration=300"><ion-icon name='logo-instagram'></ion-icon></a></li> 
+                                </ul> 
+                            </div> 
+                        </div> 
+                    </div>
+
+                    <!-- Second Vice President Card -->
+                    <div class="shadow-lg rounded-lg relative overflow-hidden group w-64 h-64">
+                        <img src="assets1/Screenshot 2024-11-23 111710.png" class="rounded-lg w-full h-full object-cover" alt="">
+                        <div class="absolute bg-black bg-opacity-60 -translate-x-full rounded-lg top-0 left-0 w-full h-full flex items-center justify-center group-hover:translate-x-0 duration-300">
+                            <div class="text-center">
+                                <h3 class="text-white text-2xl font-bold mb-2 font-['Merriweather'] text-center text-white mb-12 glow-text" data-aos="fade-down" data-aos-duration="1000">Shreya Kulkarni</h3>
+                                <ul>
+                                    <li class="inline-block mx-3"><a class="text-white hover:text-purple-500 duration-300"><ion-icon name="logo-linkedin"></ion-icon></a></li>
+                                    <li class="inline-block mx-3"><a class="text-white hover:text-purple-500 duration=300"><ion-icon name='logo-instagram'></ion-icon></a></li> 
+                                </ul> 
+                            </div> 
+                        </div> 
+                    </div>
+                </div>
+
+                <div class="text-center py-8 w-full">
+                    <h1 class="text-4xl md:text-5xl font-['Merriweather'] text-center text-white mb-12 glow-text" data-aos="fade-down" data-aos-duration="1000">SECRETARY</h1>
+                </div>
+
+                <div class="flex flex-col md:flex-row justify-center gap-8 w-full">
+                    <!-- First Vice President Card -->
+                    <div class="shadow-lg rounded-lg relative overflow-hidden group w-64 h-64">
+                        <img src="assets1/Screenshot 2024-11-23 111710.png" class="rounded-lg w-full h-full object-cover" alt="">
+                        <div class="absolute bg-black bg-opacity-60 -translate-x-full rounded-lg top-0 left-0 w-full h-full flex items-center justify-center group-hover:translate-x-0 duration-300">
+                            <div class="text-center">
+                                <h3 class="text-white text-2xl font-bold mb-2 font-['Merriweather'] text-center text-white mb-12 glow-text" data-aos="fade-down" data-aos-duration="1000">Abhay Yadav</h3>
+                                <ul>
+                                    <li class="inline-block mx-3"><a class="text-white hover:text-purple-500 duration-300"><ion-icon name="logo-linkedin"></ion-icon></a></li>
+                                    <li class="inline-block mx-3"><a class="text-white hover:text-purple-500 duration=300"><ion-icon name='logo-instagram'></ion-icon></a></li> 
+                                </ul> 
+                            </div> 
+                        </div> 
+                    </div>
+
+                    <!-- Second Vice President Card -->
+                    <div class="shadow-lg rounded-lg relative overflow-hidden group w-64 h-64">
+                        <img src="assets1/sairaj.jpeg" class="rounded-lg w-full h-full object-cover" alt="">
+                        <div class="absolute bg-black bg-opacity-60 -translate-x-full rounded-lg top-0 left-0 w-full h-full flex items-center justify-center group-hover:translate-x-0 duration-300">
+                            <div class="text-center">
+                                <h3 class="text-white text-2xl font-bold mb-2 font-['Merriweather'] text-center text-white mb-12 glow-text" data-aos="fade-down" data-aos-duration="1000">Sairaj Abnave</h3>
+                                <ul>
+                                    <li class="inline-block mx-3"><a class="text-white hover:text-purple-500 duration-300"><ion-icon name="logo-linkedin"></ion-icon></a></li>
+                                    <li class="inline-block mx-3"><a class="text-white hover:text-purple-500 duration=300"><ion-icon name='logo-instagram'></ion-icon></a></li> 
+                                </ul> 
+                            </div> 
+                        </div> 
+                    </div>
+                </div>
+
+                <div class="text-center py-8 w-full">
+                    <h1 class="text-4xl md:text-5xl font-['Merriweather'] text-center text-white mb-12 glow-text" data-aos="fade-down" data-aos-duration="1000">TREASURER</h1>
+                </div>
+
+                <div class="flex flex-col md:flex-row justify-center gap-8 w-full">
+                    <!-- First Vice President Card -->
+                    <div class="shadow-lg rounded-lg relative overflow-hidden group w-64 h-64">
+                        <img src="assets1/Bhagyashree.jpeg" class="rounded-lg w-full h-full object-cover" alt="">
+                        <div class="absolute bg-black bg-opacity-60 -translate-x-full rounded-lg top-0 left-0 w-full h-full flex items-center justify-center group-hover:translate-x-0 duration-300">
+                            <div class="text-center">
+                                <h3 class="text-white text-2xl font-bold mb-2 font-['Merriweather'] text-center text-white mb-12 glow-text" data-aos="fade-down" data-aos-duration="1000">Bhagyashree Gosavi</h3>
+                                <ul>
+                                    <li class="inline-block mx-3"><a class="text-white hover:text-purple-500 duration-300"><ion-icon name="logo-linkedin"></ion-icon></a></li>
+                                    <li class="inline-block mx-3"><a class="text-white hover:text-purple-500 duration=300"><ion-icon name='logo-instagram'></ion-icon></a></li> 
+                                </ul> 
+                            </div> 
+                        </div> 
+                    </div>
+
+                    <!-- Second Vice President Card -->
+                    <div class="shadow-lg rounded-lg relative overflow-hidden group w-64 h-64">
+                        <img src="assets1/Screenshot 2024-11-23 111710.png" class="rounded-lg w-full h-full object-cover" alt="">
+                        <div class="absolute bg-black bg-opacity-60 -translate-x-full rounded-lg top-0 left-0 w-full h-full flex items-center justify-center group-hover:translate-x-0 duration-300">
+                            <div class="text-center">
+                                <h3 class="text-white text-2xl font-bold mb-2 font-['Merriweather'] text-center text-white mb-12 glow-text" data-aos="fade-down" data-aos-duration="1000">Anushka Joshi</h3>
+                                <ul>
+                                    <li class="inline-block mx-3"><a class="text-white hover:text-purple-500 duration-300"><ion-icon name="logo-linkedin"></ion-icon></a></li>
+                                    <li class="inline-block mx-3"><a class="text-white hover:text-purple-500 duration=300"><ion-icon name='logo-instagram'></ion-icon></a></li> 
+                                </ul> 
+                            </div> 
+                        </div> 
+                    </div>
+                </div>
+
+                <div class="text-center py-8 w-full">
+                    <h1 class="text-4xl md:text-5xl font-['Merriweather'] text-center text-white mb-12 glow-text" data-aos="fade-down" data-aos-duration="1000">SY SECRETARY</h1>
+                </div>
+
+                <div class="flex flex-col md:flex-row justify-center gap-8 w-full">
+                    <!-- First Vice President Card -->
+                    <div class="shadow-lg rounded-lg relative overflow-hidden group w-64 h-64">
+                        <img src="assets1/Anish.jpeg" class="rounded-lg w-full h-full object-cover" alt="">
+                        <div class="absolute bg-black bg-opacity-60 -translate-x-full rounded-lg top-0 left-0 w-full h-full flex items-center justify-center group-hover:translate-x-0 duration-300">
+                            <div class="text-center">
+                                <h3 class="text-white text-2xl font-bold mb-2 font-['Merriweather'] text-center text-white mb-12 glow-text" data-aos="fade-down" data-aos-duration="1000">Anish Bene</h3>
+                                <ul>
+                                    <li class="inline-block mx-3"><a class="text-white hover:text-purple-500 duration-300"><ion-icon name="logo-linkedin"></ion-icon></a></li>
+                                    <li class="inline-block mx-3"><a class="text-white hover:text-purple-500 duration=300"><ion-icon name='logo-instagram'></ion-icon></a></li> 
+                                </ul> 
+                            </div> 
+                        </div> 
+                    </div>
+
+                    <!-- Second Vice President Card -->
+                    <div class="shadow-lg rounded-lg relative overflow-hidden group w-64 h-64">
+                        <img src="assets1/shrinivas.jpeg" class="rounded-lg w-full h-full object-cover" alt="">
+                        <div class="absolute bg-black bg-opacity-60 -translate-x-full rounded-lg top-0 left-0 w-full h-full flex items-center justify-center group-hover:translate-x-0 duration-300">
+                            <div class="text-center">
+                                <h3 class="text-white text-2xl font-bold mb-2 font-['Merriweather'] text-center text-white mb-12 glow-text" data-aos="fade-down" data-aos-duration="1000">Shrinivas Navindgikar</h3>
+                                <ul>
+                                    <li class="inline-block mx-3"><a class="text-white hover:text-purple-500 duration-300"><ion-icon name="logo-linkedin"></ion-icon></a></li>
+                                    <li class="inline-block mx-3"><a class="text-white hover:text-purple-500 duration=300"><ion-icon name='logo-instagram'></ion-icon></a></li> 
+                                </ul> 
+                            </div> 
+                        </div> 
+                    </div>
+                </div>
+            </div>
+        </section> 
+    </div>
+</section>
+
+
+    <footer class="mt-16 bg-gradient-to-r from-black/80 to-gray-900/80 py-16" data-aos="fade-up" data-aos-duration="1000">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <!-- Animated heading -->
+            <h3 class="text-3xl mb-12 relative inline-block" data-aos="fade-down" data-aos-duration="800">
+                <span class="footer-title bg-gradient-to-r from-blue-400 via-purple-400 to-blue-400 bg-clip-text text-transparent font-bold">
+                    Follow Us
+                </span>
+                <div class="absolute w-full h-1 bottom-0 left-0 bg-gradient-to-r from-blue-400 via-purple-400 to-blue-400 transform scale-x-0 transition-transform duration-300 hover:scale-x-100"></div>
+            </h3>
+    
+            <div  class="flex justify-center gap-12 flex-wrap" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200"  >
+                <!-- Instagram -->
+                <a href="#" class="social-icon-wrapper group">
+                    <div class="social-icon instagram">
+                        <i class="fab fa-instagram text-2xl"></i>
+                    </div>
+                    <span class="social-tooltip">Instagram</span>
+                </a>
+    
+                <!-- Facebook -->
+                <a href="#" class="social-icon-wrapper group">
+                    <div class="social-icon facebook">
+                        <i class="fab fa-facebook text-2xl"></i>
+                    </div>
+                    <span class="social-tooltip">Facebook</span>
+                </a>
+    
+                <!-- LinkedIn -->
+                <a href="#" class="social-icon-wrapper group">
+                    <div class="social-icon linkedin">
+                        <i class="fab fa-linkedin text-2xl"></i>
+                    </div>
+                    <span class="social-tooltip">LinkedIn</span>
+                </a>
+    
+                <!-- YouTube -->
+                <a href="#" class="social-icon-wrapper group">
+                    <div class="social-icon youtube">
+                        <i class="fab fa-youtube text-2xl"></i>
+                    </div>
+                    <span class="social-tooltip">YouTube</span>
+                </a>
+            </div>
+        </div>
+    </footer>
+    
+    <style>
+    /* Social Icons Base Styles */
+    .social-icon-wrapper {
+        position: relative;
+        perspective: 1000px;
+    }
+    
+    .social-icon {
+        position: relative;
+        width: 60px;
+        height: 60px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: all 0.5s ease;
+        backdrop-filter: blur(5px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        overflow: hidden;
+        cursor: pointer;
+    }
+    
+    /* Individual Social Icon Colors */
+    .instagram:hover {
+        background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+        box-shadow: 0 0 20px rgba(214, 36, 159, 0.5);
+        transform: translateY(-5px) rotateY(10deg);
+    }
+    
+    .facebook:hover {
+        background: #4267B2;
+        box-shadow: 0 0 20px rgba(66, 103, 178, 0.5);
+        transform: translateY(-5px) rotateY(-10deg);
+    }
+    
+    .linkedin:hover {
+        background: #0077b5;
+        box-shadow: 0 0 20px rgba(0, 119, 181, 0.5);
+        transform: translateY(-5px) rotateY(10deg);
+    }
+    
+    .youtube:hover {
+        background: #FF0000;
+        box-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
+        transform: translateY(-5px) rotateY(-10deg);
+    }
+    
+    /* Tooltip Styling */
+    .social-tooltip {
+        position: absolute;
+        bottom: -40px;
+        left: 50%;
+        transform: translateX(-50%) translateY(10px);
+        background: rgba(255, 255, 255, 0.95);
+        color: #000;
+        padding: 8px 15px;
+        border-radius: 5px;
+        font-size: 0.875rem;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+        white-space: nowrap;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+    
+    .social-tooltip::before {
+        content: '';
+        position: absolute;
+        top: -5px;
+        left: 50%;
+        transform: translateX(-50%);
+        border-width: 0 5px 5px 5px;
+        border-style: solid;
+        border-color: transparent transparent rgba(255, 255, 255, 0.95) transparent;
+    }
+    
+    .social-icon-wrapper:hover .social-tooltip {
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(-50%) translateY(0);
+    }
+    
+    /* Icon Hover Effects */
+    .social-icon i {
+        transition: all 0.3s ease;
+        color: white;
+    }
+    
+    .social-icon:hover i {
+        transform: scale(1.2);
+        animation: pulse 1s infinite;
+    }
+    
+    @keyframes pulse {
+        0% { transform: scale(1.2); }
+        50% { transform: scale(1.1); }
+        100% { transform: scale(1.2); }
+    }
+    
+    /* Footer Title Hover Effect */
+    .footer-title {
+        position: relative;
+        background-size: 200% auto;
+        animation: shine 3s linear infinite;
+    }
+    
+    @keyframes shine {
+        to {
+            background-position: 200% center;
+        }
+    }
+    </style>
+
+    <script src="script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 1000,
+            once: true
+        });
+
+        // Parallax effect
+         // Parallax effect
+         document.addEventListener("DOMContentLoaded", () => {
+    // Debounce function to limit the rate of updates
+    function debounce(func, wait) {
+        let timeout;
+        return function executedFunction(...args) {
+            const later = () => {
+                clearTimeout(timeout);
+                func(...args);
+            };
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+        };
+    }
+
+    // Smooth parallax effect
+    document.addEventListener("mousemove", debounce((e) => {
+        requestAnimationFrame(() => {
+            document.querySelectorAll(".layer").forEach(layer => {
+                const speed = layer.getAttribute("data-speed") / 10; // Reduced sensitivity
+                const x = (window.innerWidth - e.pageX * speed) / 100;
+                const y = (window.innerHeight - e.pageY * speed) / 100;
+                layer.style.transform = `translateX(${x}px) translateY(${y}px)`;
+            });
+        });
+    }, 10)); // Update every 10ms at most
+});
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const progress = document.querySelector('.progress');
+            const percentage = document.querySelector('.percentage');
+            const preloader = document.querySelector('.preloader');
+            
+            let width = 0;
+            const interval = setInterval(() => {
+                if (width >= 100) {
+                    clearInterval(interval);
+                    setTimeout(() => {
+                        preloader.style.opacity = '0';
+                        setTimeout(() => {
+                            preloader.style.display = 'none';
+                        }, 500);
+                    }, 200);
+                } else {
+                    width += 2;
+                    progress.style.width = width + '%';
+                    percentage.textContent = width + '%';
+                }
+            }, 30);
+        });
+        document.addEventListener('DOMContentLoaded', () => {
+        const coreTeamSection = document.querySelector('.core-team-section');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Add visible class to trigger fade-in
+                    coreTeamSection.classList.remove('opacity-0', 'translate-y-10');
+                    coreTeamSection.classList.add('opacity-100', 'translate-y-0');
+                    // Stop observing after it has faded in
+                    observer.unobserve(coreTeamSection);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        // Start observing the core team section
+        observer.observe(coreTeamSection);
+    });
+
+    </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes glow {
+            0% { text-shadow: 0 0 5px #a6c1ee, 0 0 10px #9694FF, 0 0 15px #605EA1; }
+            50% { text-shadow: 0 0 10px #9694FF, 0 0 20px #605EA1, 0 0 25px #4335A7; }
+            100% { text-shadow: 0 0 5px #a6c1ee, 0 0 10px #9694FF, 0 0 15px #605EA1; }
+        }
+        .fade-in { 
+            animation: fadeIn 1s ease forwards; 
+        }
+        .glow-text { 
+            animation: glow 2s infinite ease-in-out; 
+        }
+        .layer {
+            position: absolute;
+            pointer-events: none;
+            transition: transform 0.2s linear;
+            filter: brightness(0.7) saturate(0.8);
+            mix-blend-mode: multiply;
+        }
+        .parallax {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            text-align: center;
+            background-color: rgba(71, 78, 147, 0.7);
+        }
+        #text {
+            position: absolute;
+            font-size: 5em;
+            color: rgba(255, 255, 255, 0.95);
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3), 2px 2px 4px rgba(41, 19, 43, 0.538);
+            z-index: 10;
+        }
+        .moon {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background: rgba(255, 255, 230, 0.9);
+            border-radius: 50%;
+            top: 50px;
+            right: 100px;
+            box-shadow: 0 0 50px rgba(255, 255, 230, 0.5);
+            z-index: 1;
+        }
+        .letter { 
+            display: inline-block; 
+            opacity: 0; 
+        }
+
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, #16213e, #474E93);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s;
+        }
+
+        .loader-content {
+            text-align: center;
+            color: white;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .progress-bar {
+            width: 200px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            margin: 20px auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .progress {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            background: linear-gradient(90deg, #a6c1ee, #9694FF);
+            width: 0%;
+            border-radius: 4px;
+            transition: width 0.05s ease;
+            box-shadow: 0 0 10px rgba(150, 148, 255, 0.5);
+        }
+
+        .percentage {
+            font-size: 24px;
+            font-weight: 500;
+            text-shadow: 0 0 10px rgba(166, 193, 238, 0.5);
+        }
+
+        .loading-text {
+            margin-top: 10px;
+            font-size: 14px;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body class="font-[poppins] bg-gradient-to-t from-[#474E93] to-[#16213e] m-0">
+    <div class="preloader">
+        <div class="loader-content">
+            <div class="percentage">0%</div>
+            <div class="progress-bar">
+                <div class="progress"></div>
+            </div>
+            <div class="loading-text">Loading...</div>
+        </div>
+    </div>
+    <header class="bg-transparent absolute top-0 left-0 w-full z-10">
+        <nav class="flex flex-col md:flex-row justify-between items-center w-[92%] mx-auto py-1">
+            <div data-aos="fade-right">
+                <img class="w-19 h-10" src="assets1/nk.png" alt="Logo">
+            </div>
+            <ul class="flex flex-col md:flex-row items-center gap-8 text-large font-medium mt-4 md:mt-0" data-aos="fade-down" data-aos-delay="100">
+                <li><a class="text-white relative hover:text-gray-300 after:block after:absolute after:bg-blue-400 after:h-[3px] after:w-full after:scale-x-0 after:transition-transform after:duration-300 after:origin-center hover:after:scale-x-100" href="index2.html">Home</a></li>
+                <li><a class="text-white relative hover:text-gray-300 after:block after:absolute after:bg-blue-400 after:h-[3px] after:w-full after:scale-x-0 after:transition-transform after:duration-300 after:origin-center hover:after:scale-x-100" href="about.html">About</a></li>
+                <li><a class="text-white relative hover:text-gray-300 after:block after:absolute after:bg-blue-400 after:h-[3px] after:w-full after:scale-x-0 after:transition-transform after:duration-300 after:origin-center hover:after:scale-x-100" href="eventsFinal.html">Events</a></li>
+                <li><a class="text-white relative hover:text-gray-300 after:block after:absolute after:bg-blue-400 after:h-[3px] after:w-full after:scale-x-0 after:transition-transform after:duration-300 after:origin-center hover:after:scale-x-100" href="core.html">Core Members</a></li>
+                <li><a class="text-white relative hover:text-gray-300 after:block after:absolute after:bg-blue-400 after:h-[3px] after:w-full after:scale-x-0 after:transition-transform after:duration-300 after:origin-center hover:after:scale-x-100" href="contact.html">Contact Us</a></li>
+                <li><a class="text-white relative hover:text-gray-300 after:block after:absolute after:bg-blue-400 after:h-[3px] after:w-full after:scale-x-0 after:transition-transform after:duration-300 after:origin-center hover:after:scale-x-100" href="timeline2.html">Blogs</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="parallax relative flex justify-center items-center h-screen overflow-hidden text-center">
+        <div class="moon"></div>
+        <img src="assets1/hill1.png" id="hill1" class="layer w-full" data-speed="2" alt="Hill 1">
+        <img src="assets1/hill2.png" class="layer w-full" data-speed="3" alt="Hill 2">
+        <img src="assets1/hill3.png" class="layer w-full" data-speed="4" alt="Hill 3">
+        <img src="assets1/hill4.png" id="hill4" class="layer w-full" data-speed="5" alt="Hill 4">
+        <img src="assets1/hill5.png" id="hill5" class="layer w-full" data-speed="6" alt="Hill 5">
+        <img src="assets1/tree.png" class="layer w-full" data-speed="7" alt="Tree">
+        <h2 id="text" class="absolute text-5xl text-white z-0 drop-shadow-md glow-text">CORE MEMBERS</h2>
+        <img src="assets1/leaf.png" id="leaf" class="layer w-full" data-speed="8" alt="Leaf">
+        <img src="assets1/plant.png" class="layer w-full" data-speed="9" alt="Plant">
+    </section>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<div class="text-center py-8">
+    <h1 class="text-4xl md:text-5xl font-['Merriweather'] text-center text-white mb-12 glow-text" data-aos="fade-down" data-aos-duration="1000">CORE TEAM MEMBERS</h1>
+
+</div>
+
+<section class="core-team-section opacity-0 translate-y-10 transition-all duration-500 px-4">
+    <!-- Added a container div with dark background and padding -->
+    <div class="max-w-4xl mx-auto bg-black/40 backdrop-blur-sm rounded-xl p-8 shadow-2xl">
+        <section class="container mx-auto py-6">
+            <div class="text-center py-8">
+                <h1 class="text-4xl md:text-5xl font-['Merriweather'] text-center text-white mb-12 glow-text" data-aos="fade-down" data-aos-duration="1000"> PRESIDENT </h1>
+            </div>
+            <!-- Changed to flex column layout -->
+            <div class="flex flex-col items-center gap-8">
+                
+                <div class="shadow-lg rounded-lg relative overflow-hidden group w-64 h-64">
+                    <img src="assets1/Screenshot 2024-11-23 111633.png" class="rounded-lg w-full h-full object-cover" alt="">
+                    <div class="absolute bg-black bg-opacity-60 -translate-x-full rounded-lg top-0 left-0 w-full h-full flex items-center justify-center group-hover:translate-x-0 duration-300">
+                        <div class="text-center">
+                            <h3 class="text-white text-2xl font-bold mb-2 font-['Merriweather'] text-center text-white mb-12 glow-text" data-aos="fade-down" data-aos-duration="1000">RIDDHI RAUL</h3>
+                            <ul>
+                                <li class="inline-block mx-3"><a class="text-white hover:text-purple-500 duration-300"><ion-icon name="logo-linkedin"></ion-icon></a></li>
+                                <li class="inline-block mx-3"><a class="text-white hover:text-purple-500 duration=300"><ion-icon name='logo-instagram'></ion-icon></a></li> 
+                            </ul> 
+                        </div> 
+                    </div> 
+                </div> 
+                <!-- Vice Presidents Section -->
+                <div class="text-center py-8 w-full">
+                    <h1 class="text-4xl md:text-5xl font-['Merriweather'] text-center text-white mb-12 glow-text" data-aos="fade-down" data-aos-duration="1000">VICE PRESIDENTS</h1>
+                </div>
+                
+                <!-- Flex container for side-by-side vice president cards -->
+                <div class="flex flex-col md:flex-row justify-center gap-8 w-full">
+                    <!-- First Vice President Card -->
+                    <div class="shadow-lg rounded-lg relative overflow-hidden group w-64 h-64">
+                        <img src="assets1/darshan.jpeg" class="rounded-lg w-full h-full object-cover" alt="">
+                        <div class="absolute bg-black bg-opacity-60 -translate-x-full rounded-lg top-0 left-0 w-full h-full flex items-center justify-center group-hover:translate-x-0 duration-300">
+                            <div class="text-center">
+                                <h3 class="text-white text-2xl font-bold mb-2 font-['Merriweather'] text-center text-white mb-12 glow-text" data-aos="fade-down" data-aos-duration="1000">Darshan Khamat</h3>
+                                <ul>
+                                    <li class="inline-block mx-3"><a class="text-white hover:text-purple-500 duration-300"><ion-icon name="logo-linkedin"></ion-icon></a></li>
+                                    <li class="inline-block mx-3"><a class="text-white hover:text-purple-500 duration=300"><ion-icon name='logo-instagram'></ion-icon></a></li> 
+                                </ul> 
+                            </div> 
+                        </div> 
+                    </div>
+
+                    <!-- Second Vice President Card -->
+                    <div class="shadow-lg rounded-lg relative overflow-hidden group w-64 h-64">
+                        <img src="assets1/Screenshot 2024-11-23 111710.png" class="rounded-lg w-full h-full object-cover" alt="">
+                        <div class="absolute bg-black bg-opacity-60 -translate-x-full rounded-lg top-0 left-0 w-full h-full flex items-center justify-center group-hover:translate-x-0 duration-300">
+                            <div class="text-center">
+                                <h3 class="text-white text-2xl font-bold mb-2 font-['Merriweather'] text-center text-white mb-12 glow-text" data-aos="fade-down" data-aos-duration="1000">Shreya Kulkarni</h3>
+                                <ul>
+                                    <li class="inline-block mx-3"><a class="text-white hover:text-purple-500 duration-300"><ion-icon name="logo-linkedin"></ion-icon></a></li>
+                                    <li class="inline-block mx-3"><a class="text-white hover:text-purple-500 duration=300"><ion-icon name='logo-instagram'></ion-icon></a></li> 
+                                </ul> 
+                            </div> 
+                        </div> 
+                    </div>
+                </div>
+
+                <div class="text-center py-8 w-full">
+                    <h1 class="text-4xl md:text-5xl font-['Merriweather'] text-center text-white mb-12 glow-text" data-aos="fade-down" data-aos-duration="1000">SECRETARY</h1>
+                </div>
+
+                <div class="flex flex-col md:flex-row justify-center gap-8 w-full">
+                    <!-- First Vice President Card -->
+                    <div class="shadow-lg rounded-lg relative overflow-hidden group w-64 h-64">
+                        <img src="assets1/Screenshot 2024-11-23 111710.png" class="rounded-lg w-full h-full object-cover" alt="">
+                        <div class="absolute bg-black bg-opacity-60 -translate-x-full rounded-lg top-0 left-0 w-full h-full flex items-center justify-center group-hover:translate-x-0 duration-300">
+                            <div class="text-center">
+                                <h3 class="text-white text-2xl font-bold mb-2 font-['Merriweather'] text-center text-white mb-12 glow-text" data-aos="fade-down" data-aos-duration="1000">Abhay Yadav</h3>
+                                <ul>
+                                    <li class="inline-block mx-3"><a class="text-white hover:text-purple-500 duration-300"><ion-icon name="logo-linkedin"></ion-icon></a></li>
+                                    <li class="inline-block mx-3"><a class="text-white hover:text-purple-500 duration=300"><ion-icon name='logo-instagram'></ion-icon></a></li> 
+                                </ul> 
+                            </div> 
+                        </div> 
+                    </div>
+
+                    <!-- Second Vice President Card -->
+                    <div class="shadow-lg rounded-lg relative overflow-hidden group w-64 h-64">
+                        <img src="assets1/sairaj.jpeg" class="rounded-lg w-full h-full object-cover" alt="">
+                        <div class="absolute bg-black bg-opacity-60 -translate-x-full rounded-lg top-0 left-0 w-full h-full flex items-center justify-center group-hover:translate-x-0 duration-300">
+                            <div class="text-center">
+                                <h3 class="text-white text-2xl font-bold mb-2 font-['Merriweather'] text-center text-white mb-12 glow-text" data-aos="fade-down" data-aos-duration="1000">Sairaj Abnave</h3>
+                                <ul>
+                                    <li class="inline-block mx-3"><a class="text-white hover:text-purple-500 duration-300"><ion-icon name="logo-linkedin"></ion-icon></a></li>
+                                    <li class="inline-block mx-3"><a class="text-white hover:text-purple-500 duration=300"><ion-icon name='logo-instagram'></ion-icon></a></li> 
+                                </ul> 
+                            </div> 
+                        </div> 
+                    </div>
+                </div>
+
+                <div class="text-center py-8 w-full">
+                    <h1 class="text-4xl md:text-5xl font-['Merriweather'] text-center text-white mb-12 glow-text" data-aos="fade-down" data-aos-duration="1000">TREASURER</h1>
+                </div>
+
+                <div class="flex flex-col md:flex-row justify-center gap-8 w-full">
+                    <!-- First Vice President Card -->
+                    <div class="shadow-lg rounded-lg relative overflow-hidden group w-64 h-64">
+                        <img src="assets1/Bhagyashree.jpeg" class="rounded-lg w-full h-full object-cover" alt="">
+                        <div class="absolute bg-black bg-opacity-60 -translate-x-full rounded-lg top-0 left-0 w-full h-full flex items-center justify-center group-hover:translate-x-0 duration-300">
+                            <div class="text-center">
+                                <h3 class="text-white text-2xl font-bold mb-2 font-['Merriweather'] text-center text-white mb-12 glow-text" data-aos="fade-down" data-aos-duration="1000">Bhagyashree Gosavi</h3>
+                                <ul>
+                                    <li class="inline-block mx-3"><a class="text-white hover:text-purple-500 duration-300"><ion-icon name="logo-linkedin"></ion-icon></a></li>
+                                    <li class="inline-block mx-3"><a class="text-white hover:text-purple-500 duration=300"><ion-icon name='logo-instagram'></ion-icon></a></li> 
+                                </ul> 
+                            </div> 
+                        </div> 
+                    </div>
+
+                    <!-- Second Vice President Card -->
+                    <div class="shadow-lg rounded-lg relative overflow-hidden group w-64 h-64">
+                        <img src="assets1/Screenshot 2024-11-23 111710.png" class="rounded-lg w-full h-full object-cover" alt="">
+                        <div class="absolute bg-black bg-opacity-60 -translate-x-full rounded-lg top-0 left-0 w-full h-full flex items-center justify-center group-hover:translate-x-0 duration-300">
+                            <div class="text-center">
+                                <h3 class="text-white text-2xl font-bold mb-2 font-['Merriweather'] text-center text-white mb-12 glow-text" data-aos="fade-down" data-aos-duration="1000">Anushka Joshi</h3>
+                                <ul>
+                                    <li class="inline-block mx-3"><a class="text-white hover:text-purple-500 duration-300"><ion-icon name="logo-linkedin"></ion-icon></a></li>
+                                    <li class="inline-block mx-3"><a class="text-white hover:text-purple-500 duration=300"><ion-icon name='logo-instagram'></ion-icon></a></li> 
+                                </ul> 
+                            </div> 
+                        </div> 
+                    </div>
+                </div>
+
+                <div class="text-center py-8 w-full">
+                    <h1 class="text-4xl md:text-5xl font-['Merriweather'] text-center text-white mb-12 glow-text" data-aos="fade-down" data-aos-duration="1000">SY SECRETARY</h1>
+                </div>
+
+                <div class="flex flex-col md:flex-row justify-center gap-8 w-full">
+                    <!-- First Vice President Card -->
+                    <div class="shadow-lg rounded-lg relative overflow-hidden group w-64 h-64">
+                        <img src="assets1/Anish.jpeg" class="rounded-lg w-full h-full object-cover" alt="">
+                        <div class="absolute bg-black bg-opacity-60 -translate-x-full rounded-lg top-0 left-0 w-full h-full flex items-center justify-center group-hover:translate-x-0 duration-300">
+                            <div class="text-center">
+                                <h3 class="text-white text-2xl font-bold mb-2 font-['Merriweather'] text-center text-white mb-12 glow-text" data-aos="fade-down" data-aos-duration="1000">Anish Bene</h3>
+                                <ul>
+                                    <li class="inline-block mx-3"><a class="text-white hover:text-purple-500 duration-300"><ion-icon name="logo-linkedin"></ion-icon></a></li>
+                                    <li class="inline-block mx-3"><a class="text-white hover:text-purple-500 duration=300"><ion-icon name='logo-instagram'></ion-icon></a></li> 
+                                </ul> 
+                            </div> 
+                        </div> 
+                    </div>
+
+                    <!-- Second Vice President Card -->
+                    <div class="shadow-lg rounded-lg relative overflow-hidden group w-64 h-64">
+                        <img src="assets1/shrinivas.jpeg" class="rounded-lg w-full h-full object-cover" alt="">
+                        <div class="absolute bg-black bg-opacity-60 -translate-x-full rounded-lg top-0 left-0 w-full h-full flex items-center justify-center group-hover:translate-x-0 duration-300">
+                            <div class="text-center">
+                                <h3 class="text-white text-2xl font-bold mb-2 font-['Merriweather'] text-center text-white mb-12 glow-text" data-aos="fade-down" data-aos-duration="1000">Shrinivas Navindgikar</h3>
+                                <ul>
+                                    <li class="inline-block mx-3"><a class="text-white hover:text-purple-500 duration-300"><ion-icon name="logo-linkedin"></ion-icon></a></li>
+                                    <li class="inline-block mx-3"><a class="text-white hover:text-purple-500 duration=300"><ion-icon name='logo-instagram'></ion-icon></a></li> 
+                                </ul> 
+                            </div> 
+                        </div> 
+                    </div>
+                </div>
+            </div>
+        </section> 
+    </div>
+</section>
+
+
+    <footer class="mt-16 bg-gradient-to-r from-black/80 to-gray-900/80 py-16" data-aos="fade-up" data-aos-duration="1000">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <!-- Animated heading -->
+            <h3 class="text-3xl mb-12 relative inline-block" data-aos="fade-down" data-aos-duration="800">
+                <span class="footer-title bg-gradient-to-r from-blue-400 via-purple-400 to-blue-400 bg-clip-text text-transparent font-bold">
+                    Follow Us
+                </span>
+                <div class="absolute w-full h-1 bottom-0 left-0 bg-gradient-to-r from-blue-400 via-purple-400 to-blue-400 transform scale-x-0 transition-transform duration-300 hover:scale-x-100"></div>
+            </h3>
+    
+            <div  class="flex justify-center gap-12 flex-wrap" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200"  >
+                <!-- Instagram -->
+                <a href="#" class="social-icon-wrapper group">
+                    <div class="social-icon instagram">
+                        <i class="fab fa-instagram text-2xl"></i>
+                    </div>
+                    <span class="social-tooltip">Instagram</span>
+                </a>
+    
+                <!-- Facebook -->
+                <a href="#" class="social-icon-wrapper group">
+                    <div class="social-icon facebook">
+                        <i class="fab fa-facebook text-2xl"></i>
+                    </div>
+                    <span class="social-tooltip">Facebook</span>
+                </a>
+    
+                <!-- LinkedIn -->
+                <a href="#" class="social-icon-wrapper group">
+                    <div class="social-icon linkedin">
+                        <i class="fab fa-linkedin text-2xl"></i>
+                    </div>
+                    <span class="social-tooltip">LinkedIn</span>
+                </a>
+    
+                <!-- YouTube -->
+                <a href="#" class="social-icon-wrapper group">
+                    <div class="social-icon youtube">
+                        <i class="fab fa-youtube text-2xl"></i>
+                    </div>
+                    <span class="social-tooltip">YouTube</span>
+                </a>
+            </div>
+        </div>
+    </footer>
+    
+    <style>
+    /* Social Icons Base Styles */
+    .social-icon-wrapper {
+        position: relative;
+        perspective: 1000px;
+    }
+    
+    .social-icon {
+        position: relative;
+        width: 60px;
+        height: 60px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: all 0.5s ease;
+        backdrop-filter: blur(5px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        overflow: hidden;
+        cursor: pointer;
+    }
+    
+    /* Individual Social Icon Colors */
+    .instagram:hover {
+        background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+        box-shadow: 0 0 20px rgba(214, 36, 159, 0.5);
+        transform: translateY(-5px) rotateY(10deg);
+    }
+    
+    .facebook:hover {
+        background: #4267B2;
+        box-shadow: 0 0 20px rgba(66, 103, 178, 0.5);
+        transform: translateY(-5px) rotateY(-10deg);
+    }
+    
+    .linkedin:hover {
+        background: #0077b5;
+        box-shadow: 0 0 20px rgba(0, 119, 181, 0.5);
+        transform: translateY(-5px) rotateY(10deg);
+    }
+    
+    .youtube:hover {
+        background: #FF0000;
+        box-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
+        transform: translateY(-5px) rotateY(-10deg);
+    }
+    
+    /* Tooltip Styling */
+    .social-tooltip {
+        position: absolute;
+        bottom: -40px;
+        left: 50%;
+        transform: translateX(-50%) translateY(10px);
+        background: rgba(255, 255, 255, 0.95);
+        color: #000;
+        padding: 8px 15px;
+        border-radius: 5px;
+        font-size: 0.875rem;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+        white-space: nowrap;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+    
+    .social-tooltip::before {
+        content: '';
+        position: absolute;
+        top: -5px;
+        left: 50%;
+        transform: translateX(-50%);
+        border-width: 0 5px 5px 5px;
+        border-style: solid;
+        border-color: transparent transparent rgba(255, 255, 255, 0.95) transparent;
+    }
+    
+    .social-icon-wrapper:hover .social-tooltip {
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(-50%) translateY(0);
+    }
+    
+    /* Icon Hover Effects */
+    .social-icon i {
+        transition: all 0.3s ease;
+        color: white;
+    }
+    
+    .social-icon:hover i {
+        transform: scale(1.2);
+        animation: pulse 1s infinite;
+    }
+    
+    @keyframes pulse {
+        0% { transform: scale(1.2); }
+        50% { transform: scale(1.1); }
+        100% { transform: scale(1.2); }
+    }
+    
+    /* Footer Title Hover Effect */
+    .footer-title {
+        position: relative;
+        background-size: 200% auto;
+        animation: shine 3s linear infinite;
+    }
+    
+    @keyframes shine {
+        to {
+            background-position: 200% center;
+        }
+    }
+    </style>
+
+    <script src="script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 1000,
+            once: true
+        });
+
+        // Parallax effect
+         // Parallax effect
+         document.addEventListener("DOMContentLoaded", () => {
+    // Debounce function to limit the rate of updates
+    function debounce(func, wait) {
+        let timeout;
+        return function executedFunction(...args) {
+            const later = () => {
+                clearTimeout(timeout);
+                func(...args);
+            };
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+        };
+    }
+
+    // Smooth parallax effect
+    document.addEventListener("mousemove", debounce((e) => {
+        requestAnimationFrame(() => {
+            document.querySelectorAll(".layer").forEach(layer => {
+                const speed = layer.getAttribute("data-speed") / 10; // Reduced sensitivity
+                const x = (window.innerWidth - e.pageX * speed) / 100;
+                const y = (window.innerHeight - e.pageY * speed) / 100;
+                layer.style.transform = `translateX(${x}px) translateY(${y}px)`;
+            });
+        });
+    }, 10)); // Update every 10ms at most
+});
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const progress = document.querySelector('.progress');
+            const percentage = document.querySelector('.percentage');
+            const preloader = document.querySelector('.preloader');
+            
+            let width = 0;
+            const interval = setInterval(() => {
+                if (width >= 100) {
+                    clearInterval(interval);
+                    setTimeout(() => {
+                        preloader.style.opacity = '0';
+                        setTimeout(() => {
+                            preloader.style.display = 'none';
+                        }, 500);
+                    }, 200);
+                } else {
+                    width += 2;
+                    progress.style.width = width + '%';
+                    percentage.textContent = width + '%';
+                }
+            }, 30);
+        });
+        document.addEventListener('DOMContentLoaded', () => {
+        const coreTeamSection = document.querySelector('.core-team-section');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Add visible class to trigger fade-in
+                    coreTeamSection.classList.remove('opacity-0', 'translate-y-10');
+                    coreTeamSection.classList.add('opacity-100', 'translate-y-0');
+                    // Stop observing after it has faded in
+                    observer.unobserve(coreTeamSection);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        // Start observing the core team section
+        observer.observe(coreTeamSection);
+    });
+
+    </script>
+</body>
+</html>
